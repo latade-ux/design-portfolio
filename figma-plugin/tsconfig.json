@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "lib": ["ES2015"],
+    "strict": false,
+    "typeRoots": [
+      "../node_modules/@figma/plugin-typings"
+    ],
+    "outDir": "./dist"
+  },
+  "include": ["./**/*.ts"]
+}
