@@ -2,26 +2,40 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { projects } from "@/lib/data";
+import Image from "next/image";
+import Link from "next/link";
+import { visibleProjects } from "@/lib/data";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 
 function ProjectCard({
   project,
 }: {
-  project: (typeof projects)[number];
+  project: (typeof visibleProjects)[number];
 }) {
   return (
+    <Link href={`/work/${project.slug}`}>
     <motion.div
       variants={fadeInUp}
-      className="group relative rounded-xl border border-card-border bg-card overflow-hidden hover:border-border-hover transition-all duration-300"
+      className="group relative rounded-xl border border-card-border bg-card overflow-hidden hover:border-border-hover transition-all duration-300 cursor-pointer h-full"
     >
-      {/* Gradient header area */}
+      {/* Image / gradient header area */}
       <div
         className={`h-48 bg-gradient-to-br ${project.color} relative overflow-hidden`}
       >
+        {project.image && (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/80" />
-        {/* Decorative grid */}
-        <div className="absolute inset-0 opacity-20 grid-pattern" />
+        {/* Decorative grid — only show when no image */}
+        {!project.image && (
+          <div className="absolute inset-0 opacity-20 grid-pattern" />
+        )}
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-500" />
       </div>
@@ -76,6 +90,7 @@ function ProjectCard({
       {/* Bottom hover accent line */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gradient-start to-gradient-end scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
     </motion.div>
+    </Link>
   );
 }
 
@@ -108,7 +123,7 @@ export default function Projects() {
 
         {/* Project grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
+          {visibleProjects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}
         </div>

@@ -35,7 +35,7 @@ export default function Experience() {
           <div className="space-y-12">
             {experiences.map((exp) => (
               <motion.div
-                key={exp.company}
+                key={`${exp.company}-${exp.period}`}
                 variants={fadeInUp}
                 className="relative pl-16"
               >
@@ -57,10 +57,7 @@ export default function Experience() {
                     </span>
                   </div>
                   <p className="text-sm text-accent-light mb-4">
-                    {exp.company}{" "}
-                    <span className="text-muted-foreground">
-                      · {exp.location}
-                    </span>
+                    {exp.company}
                   </p>
                   <ul className="space-y-2">
                     {exp.highlights.map((h, i) => (

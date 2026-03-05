@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "Process", href: "#process" },
-  { label: "Experience", href: "#experience" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#work" },
+  { label: "Process", href: "/#process" },
+  { label: "Experience", href: "/#experience" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -47,7 +47,7 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
           <a
-            href="#"
+            href="/"
             className="text-foreground font-semibold text-lg tracking-tight"
           >
             Latade<span className="text-accent">.</span>
@@ -65,7 +65,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/#contact"
               className="text-sm px-4 py-2 rounded-lg bg-accent/10 text-accent-light hover:bg-accent/20 transition-colors duration-200"
             >
               Get in touch
