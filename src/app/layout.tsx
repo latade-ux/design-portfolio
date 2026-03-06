@@ -43,12 +43,21 @@ export const metadata: Metadata = {
     siteName: "Latade — Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Latade — Senior Product Designer portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Latade — Senior Product Designer",
     description:
       "Designing AI-powered systems that turn complexity into clarity.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
