@@ -50,8 +50,8 @@ export default function CaseStudyVideo({ src, whiteBg }: Props) {
               controls
               preload="auto"
               playsInline
-              // @ts-expect-error webkit-playsinline is needed for older iOS
-              webkit-playsinline="true"
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              {...({ "webkit-playsinline": "true" } as any)}
               className="w-full h-auto block"
               src={src}
             >
@@ -90,8 +90,8 @@ export default function CaseStudyVideo({ src, whiteBg }: Props) {
             controls
             preload="auto"
             playsInline
-            // @ts-expect-error webkit-playsinline is needed for older iOS
-            webkit-playsinline="true"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            {...({ "webkit-playsinline": "true" } as any)}
             className="w-full h-auto block"
             src={src}
           >
