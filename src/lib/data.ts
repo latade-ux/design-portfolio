@@ -103,6 +103,12 @@ export const projects: Project[] = [
         "/projects/permutive-strategy.png",
         "/projects/permutive-survey.png",
       ],
+      gallery: [
+        { image: "/projects/permutive-ai-suggestions.png", title: "Dashboard - AI Prompt Suggestions" },
+        { image: "/projects/permutive-filled-prompt.png", title: "Dashboard - Filled Prompt" },
+        { image: "/projects/permutive-cohort-recommendations.png", title: "Dashboard - Cohort Recommendations" },
+        { image: "/projects/permutive-audience-size.png", title: "Dashboard - Total Estimated Audience Size" },
+      ],
       beforeAfter: {
         before: {
           image: "/projects/permutive-before.png",

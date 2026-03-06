@@ -84,11 +84,11 @@ export default async function CaseStudyPage({ params }: Props) {
                 )}
             </Fragment>
           ))}
-        {project.caseStudy.gallery && (
-          <CaseStudyGallery items={project.caseStudy.gallery} />
-        )}
         {project.caseStudy.beforeAfter && (
           <CaseStudyBeforeAfter data={project.caseStudy.beforeAfter} />
+        )}
+        {project.caseStudy.gallery && (
+          <CaseStudyGallery items={project.caseStudy.gallery} />
         )}
         {project.caseStudy.video &&
           project.caseStudy.videoInsertAfterIndex == null && (

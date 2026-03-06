@@ -76,6 +76,7 @@ export default function CaseStudyGallery({ items }: Props) {
                       fill
                       className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={90}
                     />
                   </div>
                   {/* Expand hint overlay */}

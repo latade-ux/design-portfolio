@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 
 interface Props {
@@ -11,7 +11,16 @@ interface Props {
 
 export default function CaseStudyVideo({ src, whiteBg }: Props) {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  // Ensure mobile browsers can load the video
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.load();
+    }
+  }, [src]);
 
   if (whiteBg) {
     return (
@@ -37,12 +46,15 @@ export default function CaseStudyVideo({ src, whiteBg }: Props) {
             className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-lg"
           >
             <video
+              ref={videoRef}
               controls
-              preload="metadata"
+              preload="auto"
               playsInline
+              // @ts-expect-error webkit-playsinline is needed for older iOS
+              webkit-playsinline="true"
               className="w-full h-auto block"
+              src={src}
             >
-              <source src={src} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </motion.div>
@@ -74,13 +86,15 @@ export default function CaseStudyVideo({ src, whiteBg }: Props) {
           className="relative rounded-2xl overflow-hidden border border-card-border bg-card"
         >
           <video
+            ref={videoRef}
             controls
-            preload="metadata"
+            preload="auto"
             playsInline
+            // @ts-expect-error webkit-playsinline is needed for older iOS
+            webkit-playsinline="true"
             className="w-full h-auto block"
-            poster=""
+            src={src}
           >
-            <source src={src} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </motion.div>
