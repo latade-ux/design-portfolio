@@ -551,10 +551,11 @@ export const processSteps = [
 
 export const experiences = [
   {
-    role: "Product Designer",
+    role: "Senior Product Designer",
     company: "Permutive",
     period: "Apr. 2024 – Present",
     highlights: [
+      "Designed, built, and shipped a Claude Code skill that turns prompts into on-brand HTML prototypes of the Permutive product UI, eliminating 100% of design system drift.",
       "Led end-to-end redesign of the core publisher dashboard, consolidating fragmented campaign reporting into a unified experience, reducing time-to-insight and increasing campaign activation efficiency by 20% across key publisher accounts.",
       "Designed an AI-powered cohort recommendation system leveraging predictive audience signals, increasing recommended segment adoption by 25%.",
       "Scaled the enterprise design system by introducing tokenized components and standardized data visualization patterns, significantly reducing UI inconsistencies.",
