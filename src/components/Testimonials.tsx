@@ -36,7 +36,7 @@ function TestimonialCard({
   return (
     <motion.div
       variants={fadeInUp}
-      className="relative rounded-xl border border-card-border bg-card p-8 hover:border-border-hover transition-colors duration-300 flex flex-col"
+      className="relative shrink-0 snap-start w-[85%] md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] rounded-xl border border-card-border bg-card p-8 hover:border-border-hover transition-colors duration-300 flex flex-col"
     >
       {/* Quote mark */}
       <div className="text-4xl text-accent/20 font-serif leading-none mb-4">
@@ -189,6 +189,38 @@ export default function Testimonials() {
 
   const closeModal = useCallback(() => setActiveTestimonial(null), []);
 
+  // Carousel scroll state
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  const updateArrows = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setCanPrev(el.scrollLeft > 4);
+    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    window.addEventListener("resize", updateArrows);
+    return () => window.removeEventListener("resize", updateArrows);
+  }, [updateArrows]);
+
+  const scrollByCard = (direction: 1 | -1) => {
+    const el = trackRef.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (!el || !card) return;
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    el.scrollBy({
+      left: direction * (card.offsetWidth + gap),
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+  };
+
   return (
     <>
       <section className="py-24 md:py-32 px-6">
@@ -200,17 +232,60 @@ export default function Testimonials() {
           className="mx-auto max-w-6xl"
         >
           {/* Section header */}
-          <motion.div variants={fadeInUp} className="mb-16">
-            <p className="text-sm font-mono text-accent-light mb-3 tracking-wide uppercase">
-              Testimonials
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              What collaborators say
-            </h2>
+          <motion.div
+            variants={fadeInUp}
+            className="mb-16 flex items-end justify-between gap-6"
+          >
+            <div>
+              <p className="text-sm font-mono text-accent-light mb-3 tracking-wide uppercase">
+                Testimonials
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                What collaborators say
+              </h2>
+            </div>
+
+            {/* Carousel controls — mobile relies on swipe + peeking card */}
+            <div className="hidden md:flex items-center gap-2 shrink-0">
+              {(
+                [
+                  { dir: -1, label: "Previous testimonial", enabled: canPrev, path: "M15 18l-6-6 6-6" },
+                  { dir: 1, label: "Next testimonial", enabled: canNext, path: "M9 18l6-6-6-6" },
+                ] as const
+              ).map(({ dir, label, enabled, path }) => (
+                <button
+                  key={dir}
+                  onClick={() => scrollByCard(dir)}
+                  disabled={!enabled}
+                  aria-label={label}
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-card-border bg-card text-muted-foreground hover:text-foreground hover:border-border-hover transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default disabled:hover:text-muted-foreground disabled:hover:border-card-border"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d={path} />
+                  </svg>
+                </button>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Testimonial cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Testimonial cards — horizontal scroll track, bleeds to screen edge on mobile */}
+          <div
+            ref={trackRef}
+            onScroll={updateArrows}
+            role="region"
+            aria-label="Testimonials"
+            tabIndex={0}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 scroll-px-6 md:mx-0 md:px-0 md:scroll-px-0 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
             {testimonials.map((t) => (
               <TestimonialCard
                 key={t.name}

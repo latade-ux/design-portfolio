@@ -599,6 +599,12 @@ export const experiences = [
 export const testimonials = [
   {
     quote:
+      "I worked with Latade for several years as Head of Product. My team and I all really enjoyed collaborating with him. He is extremely outcome-oriented and did a great job understanding problems and constraints and delivering high quality solutions. He is extremely easy to collaborate with and worked across many stakeholders.\n\nHis designs had a strong impact on simplifying very complex challenges into simple user interactions, driving growth and usability.",
+    name: "Katie Redmond",
+    role: "Product Leader @ Google",
+  },
+  {
+    quote:
       "I had the pleasure of working closely with Latade on several projects where his versatility and adaptability truly shone. Latade impressed me with his ability to quickly grasp the nuances of a new industry, bringing fresh perspectives and insights to the table. Throughout our time together, Latade played a pivotal role in refining our project's vision. His eye for detail, proactive approach to problem-solving, and ability to provide the \"why\" for his recommendations were instrumental in guiding our projects toward success.\n\nI particularly appreciated Latade's willingness to offer suggestions and constructive feedback. His input consistently led to improvements in our product, demonstrating a genuine commitment to achieving excellence. Even when our visions didn't perfectly align initially, Latade remained receptive to feedback, adapting his approach and iterating on designs until we reached a consensus. He was also willing to constructively challenge my ideas, which is something I very much value since he was not blindly designing what I wanted; Latade very much thinks about the customer experience and wants it to be the best it can be.\n\nLatade is a quick learner, adapting to the unique challenges of our industry and pre-existing design systems to deliver impactful solutions. I highly recommend Latade for his exceptional talent, adaptability, and collaborative spirit. I'm confident he will be a valuable asset to any team with which he works.",
     name: "Anton Djamoos",
     role: "Director of Product Operations @ Noom",
